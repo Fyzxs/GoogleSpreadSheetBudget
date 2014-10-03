@@ -42,6 +42,10 @@ function MonthSheet(sheet, prevCategory, newCategory, transactionValue) {
     newCatMatchEndRow=fullRange.getNumRows();
   }
   
+  if(prevCatMatchEndRow === 0){
+    prevCatMatchEndRow = fullRange.getNumRows();
+  }
+  
   Logger.log("[prevCategory="+prevCategory + "] [prevCatMatchStartRow="+prevCatMatchStartRow+"] [prevCatMatchEndRow=" + prevCatMatchEndRow + "]");
   CategoryGroup(sheet, prevCategory, prevCatMatchStartRow, prevCatMatchEndRow, transactionValue * INVERT_AMOUNT_VALUE);
   Logger.log("[newCategory="+newCategory + "] [newCatMatchStartRow="+newCatMatchStartRow+"] [newCatMatchEndRow=" + newCatMatchEndRow + "]");
