@@ -60,29 +60,23 @@ var CATEGORIES_SHEET_FULL_CATEGORY_COLUMN_WIDTH = 190;
 
 
 var CATEGORIES_SHEET_IGNORED_CATEGORY = "--Ignored--";
-/*This is a hacky solution
-The "Income" entry is for the income section - it just uses the first.
-It's treated differently; write what you want; it's the income section.
-I don't know how well it'll work with more than 2 income sub sections
-
-The rest are CATEGORY-HEADER, "SubCategory_1", "SubCategory_2"... "SubCategory_N"
-
-Extend/modify these to be whatever you want.
-*/
 var CATEGORIES_SHEET_DEFAULT_CATEGORIES = [
   ["Income", "Salary", "Other"],
-  ["Saving", Tech Gear", "Emergency Fund"],
-  ["Housing", "Rent", "Insurance", "House Fund"],
-  ["Child Care", "Dental Work", "School Breaks"],
-  ["Utilities", "Electric", "Cable", "Cell Phone"],
+  ["Saving", "Belle Stuff", "Tech Gear", "Emergency Fund"],
+  ["Housing", "Rent", "Insurance", "House Fund", "House Service"],
+  ["Child Care", "Child Support", "School Breaks"],
+  ["Utilities", "Electric", "INET", "Apt Utils", "Cell Phone"],
   ["Food", "Groceries", "Eating Out", "School Lunch"],
-  ["Transportation", "Insurance", "Gas", "Maintenance", "Tabs", "Bike"],
+  ["Hosting", "Renewals", "Azure"],
+  ["Transportation", "Pemco Ins", "Gas", "Maintenance", "Elantra", "CarStuff-Tabs", "Bike"],
+  ["Clothing", "Quinn", "Belle"],
   ["Medical/Health", "Non-Billed"],
-  ["Personal", "Personal Care", "Work Misc", "Dating"],
-  ["Recreation", "Dance", "Gym"],
-  ["Entertainment", "Netflix", "Socializing"],
-  ["MISC", "MISC", "Subscriptions"],
-  ["Debts", "Credit Card", "Student Loan", "Other CC"]
+  ["Personal", "Personal Care", "Work Misc", "Seeing"],
+  ["Recreation", "Belle Dance", "Belle Gym"],
+  ["Entertainment", "Streaming", "Socializing"],
+  ["MISC", "MISC", "Belle MISC", "Belle FrndBday", "Subscriptions"],
+  ["Debts", "BoA CC", "WWU Loan", "IRS", "Direct Loan", "Elantra Extra", "Firestone CC"],
+  ["Month Stuff", "KickStarter", "VideoGames", "Amazon", "Becky (Cover)", "Friend Prez", "Friend (Asst)"]
 ];
   
 /*******************************************************************
@@ -96,9 +90,6 @@ var LEDGER_COLUMN_EXTDESC = 5;
 var LEDGER_SHEET_NAME = "Ledger";
 var LEDGER_COLUMNS = [
   {"name":"Category","width":210,"hide":false,"moneyformat":false},
-  /*
-    These are the columns from the CSV of my bank, in the same order.
-  */
   {"name":"Transaction_Date","width":130,"hide":false,"moneyformat":false},
   {"name":"Transaction_ID","width":100,"hide":false,"moneyformat":false},
   {"name":"TransDesc","width":110,"hide":true,"moneyformat":false},

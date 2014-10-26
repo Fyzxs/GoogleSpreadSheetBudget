@@ -28,7 +28,10 @@ function onEdit(e){
     onLedgerCategoryChange(eventSheet, eventRange, e.value); 
   }
   else if(isLedgerEntryPaste(eventSheet, eventRange)){
+    
+    showNotification("Processing Ledger Records...");
     ledgerPaste(eventSheet, eventRange);
+    showAlert("Ledger Records Processed");
   }
   else if(isMonthBudgetedChange(eventSheet, eventRange)){
     CategoryGroupMin(eventSheet, eventRange.getRow());

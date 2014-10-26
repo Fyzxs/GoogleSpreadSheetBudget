@@ -8,13 +8,14 @@ var CategoryGroupMin = function(sheet, row){
   
   var cat = range.getValue() + CATEGORY_SUB_SPLITTER + sheet.getRange(row, BUDGET_COLUMN_CATEGORY_SUB_TITLE).getValue();
   CategoryGroup(sheet, cat, topRow, row, 0);
-   HeaderSection(sheet);
+  HeaderSection(sheet);
 };
 
 var CategoryGroup = function(sheet, category, catStartRow, catEndRow, transactionValue) {
   if(category.length <= 0) {return;}
   
   var updateBudgetSubCategory = function(range, subCategory, transactionValue){
+    if(subCategory == ""){return;}
     
     var subCatRow = 0;
     var actualRow = 0;//Place holder - may not need it
@@ -35,6 +36,7 @@ var CategoryGroup = function(sheet, category, catStartRow, catEndRow, transactio
     var cellActual = DefaultCellItem(range, subCatRow, BUDGET_COLUMN_CATEGORY_SUB_ACTUAL);
     cellActual.add(transactionValue * INVERT_AMOUNT_VALUE);
     var actual = cellActual.get();
+        
     if(actual < 0.01 && -0.01 < actual){ cellActual.set(""); }
     else if(actual < 0){cellActual.setBackground("red");}
     else{cellActual.setBackground("white");}
@@ -54,6 +56,11 @@ var CategoryGroup = function(sheet, category, catStartRow, catEndRow, transactio
       var cellPendingSecond = CellItem(range, subCatRow, BUDGET_COLUMN_CATEGORY_SUB_BUDGET_SECOND_PENDING);
       var budgetSecondValue = cellBudgetSecond.get();
       
+      {//Calc budgetSecondValue
+        var budgetSecondValue =(budgetted - budgetFirstValue);
+        if(budgetSecondValue < 0.01) budgetSecondValue = "";
+      }
+      
       var pendingFirstValue = "";
       //First
       if(actual < budgetFirstValue){
@@ -65,30 +72,34 @@ var CategoryGroup = function(sheet, category, catStartRow, catEndRow, transactio
       var pendingSecondValue = "";  
       //second
       if(pending < 0.01){
+        Logger.log("pending < 0.01");
         pendingSecondValue = "";
       }
       else if(pendingFirstValue >= 0.01){
+        Logger.log("pendingFirstValue >= 0.01");
         pendingSecondValue = budgetSecondValue;
       }
       else if(pendingFirstValue < 0.01){
-        
+        Logger.log("pendingFirstValue < 0.01");
         if(budgetSecondValue == "" || pending > budgetSecondValue){
           budgetSecondValue = pending;
         }
         else{
           budgetSecondValue = budgetted - budgetFirstValue;
         }
-        cellBudgetSecond.set(budgetSecondValue);
         
         pendingSecondValue = pending;
       }
       else if(budgetFirstValue == ""){
+        Logger.log("pendingFirstValue == ''");
         pendingSecondValue = budgetSecondValue - actual;
       }
       else{
+        Logger.log("else");
         pendingSecondValue = pending;
       }
       
+      cellBudgetSecond.set(budgetSecondValue);
       cellPendingFirst.set(pendingFirstValue <= 0 ? "" : pendingFirstValue);
       
       //set second pending

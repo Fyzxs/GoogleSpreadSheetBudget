@@ -1,6 +1,6 @@
 var copyMonthFromCurrent = function(){
   var uiApp = UiApp.createApplication()
-     .setTitle('New Sheet Being Prepared...')
+     .setTitle('New Sheet Being Prepared... [Creating new Sheet]')
      .setWidth(250)
      .setHeight(10);
   
@@ -29,15 +29,37 @@ var copyMonthFromCurrent = function(){
     var actualCol = BUDGET_COLUMN_CATEGORY_SUB_ACTUAL;
     
     for(var i = 6; i<= sheet.getLastRow(); i++){
+      
+      ////////////////////////
+      
+      var uiApp = UiApp.createApplication()
+      .setTitle('New Sheet Being Prepared... Step ' + i + ' of ' + sheet.getLastRow())
+      .setWidth(250)
+      .setHeight(10);
+      
+      SpreadsheetApp.getActiveSpreadsheet().show(uiApp);
+      /////////////////////////////
+      
+      
       if(sheet.getRange(i, checkCol).getBackground() == "#f9cb9c"){
         for(var j = actualCol; j <= sheet.getLastColumn(); j++){
           sheet.getRange(i, j).setValue("").setBackground("white");
         }
+        CategoryGroupMin(sheet, i);
       }
     }
   };
   
   cleanActual(newSheet);
+      ////////////////////////
+      
+      var uiApp = UiApp.createApplication()
+      .setTitle('New Sheet Being Prepared... Finalizing...')
+      .setWidth(250)
+      .setHeight(10);
+      
+      SpreadsheetApp.getActiveSpreadsheet().show(uiApp);
+      /////////////////////////////
   HeaderSection(newSheet);  
   
   SpreadsheetApp.getUi().alert("Sheet Ready");
@@ -293,5 +315,5 @@ var initNewMonth = function(){
   monthSheet.deleteColumns(monthSheet.getLastColumn()+1, monthSheet.getMaxColumns() - monthSheet.getLastColumn());
   monthSheet.deleteRows(monthSheet.getLastRow()+1, monthSheet.getMaxRows() - monthSheet.getLastRow() -1);
   
-  setBudgetting(monthSheet);
+  //setBudgetting(monthSheet);
 };

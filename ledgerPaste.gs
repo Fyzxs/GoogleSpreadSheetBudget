@@ -21,13 +21,15 @@ var ledgerPaste = function(sheet, range) {
   var descs = [];
   var cats = [];
   loadAutos(tracker, descs, cats);
-  
-  for(var i = 1; i <= range.getNumRows(); i++){
+  var totalRows = range.getNumRows();
+  for(var i = 1; i <= totalRows; i++){
     var desc = range.getCell(i, TRAMSCAT_PASTE_RANGE_AUTO_CATEGORIZE).getValue();
     Logger.log("[desc=" + desc + "]");
     if(desc == ""){//Assume there was a deletion
       return;
     }
+    
+    showNotification("Processing Ledger Entry " + i + " of "+ totalRows + "\n");
     
     var index = descs.indexOf(desc);
     if(index >= 0 && index < cats.length){

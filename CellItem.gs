@@ -38,7 +38,18 @@ function CellItem(range, row, col, condSettings){
   }
   
   function _set(val){
-    _cell.setValue(val);
+    
+    if(val === ""){
+      Logger.log("Clear Content");
+      _cell.clearContent();
+    }
+    else if(typeof val.toFixed === 'function'){
+      _cell.setValue(val.toFixed(2));
+      Logger.log("Setting toFixed [val=" + val.toFixed(2) + "]");
+    } else {
+      _cell.setValue(val);
+      Logger.log("Setting exact [val=" + val + "]");
+    }
     _cell.setNumberFormat("$0.00");
     var settings = _conditionalSettings(val);
     _setBackground(settings.background);
@@ -49,7 +60,10 @@ function CellItem(range, row, col, condSettings){
   }
   function _setFontColor(color){
     _cell.setFontColor(color);
-  }      
+  }
+  function _getBackground(){
+    _cell.getBackground();
+  }
   
   return {
     get: function(){
@@ -66,7 +80,10 @@ function CellItem(range, row, col, condSettings){
     },
     setBackground: function(color){
       _setBackground(color);
-    }
+    },
+    getBackground: function(){
+      _getBackground();
+    },
   }
 }
 
@@ -75,4 +92,4 @@ function DefaultCellItem(range, row, col){
       return {background:"#FFFFFF",fontColor:"#000000"};
   };
   return CellItem(range, row, col, foo);
-}
+};
