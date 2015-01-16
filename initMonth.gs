@@ -43,6 +43,9 @@ var copyMonthFromCurrent = function(){
       
       if(sheet.getRange(i, checkCol).getBackground() == "#f9cb9c"){
         for(var j = actualCol; j <= sheet.getLastColumn(); j++){
+          //Don't do the budget columns - it's annoying to fix
+          if(j==BUDGET_COLUMN_CATEGORY_SUB_BUDGET_FIRST || j==BUDGET_COLUMN_CATEGORY_SUB_BUDGET_SECOND){continue;}
+
           sheet.getRange(i, j).setValue("").setBackground("white");
         }
         CategoryGroupMin(sheet, i);

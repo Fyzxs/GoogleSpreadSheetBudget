@@ -1,6 +1,7 @@
 var CategoryGroupMin = function(sheet, row){
   var range = sheet.getRange(row, BUDGET_COLUMN_CATEGORY_TITLE);
   var topRow = row;
+  if(row < 6) return;
   for(var i = row-1; i >= 6, range.getValue().length == 0; i--){
     topRow = i;
     range = sheet.getRange(i, BUDGET_COLUMN_CATEGORY_TITLE);

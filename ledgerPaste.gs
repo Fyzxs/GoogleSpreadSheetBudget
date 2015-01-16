@@ -69,7 +69,7 @@ var UpdateCategoryTracker = function(sheet, prevCat, newCat, row){
   var cats = [];
   loadAutos(tracker, descs, cats);
   
-  var desc = sheet.getRange(row, LEDGER_COLUMN_EXTDESC).getValue();
+  var desc = sheet.getRange(row, LEDGER_COLUMN_EXTDESC).getValue();//.replace(/[0-9]/g, '');
   
   var index = descs.indexOf(desc);
 
